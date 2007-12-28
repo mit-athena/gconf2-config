@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+
+DEB_AUTO_UPDATE_DEBIAN_CONTROL = 1
+DEBATHENA_DIVERT_FILES_debathena-gconf2-config += \
+	/etc/gconf/2/path.debathena
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/debathena-divert.mk
+include /usr/share/cdbs/1/rules/debathena-check-conffiles.mk
+
+GCONF_FILES = debian/gconf.afs debian/gconf.local debian/gconf.
+
+common-build-indep:: debian/path.debathena $(GCONF_FILES)
+
+ifneq ($(wildcard /usr/share/gconf/default.path),)
+    GCONF2_PATH = /usr/share/gconf/default.path
+else
+    GCONF2_PATH = $(call debathena_check_conffiles,/etc/gconf/2/path)
+endif
+
+debian/path.debathena: $(GCONF2_PATH)
+	perl -0pe 's/^(xml:readwrite:\$$\(HOME\)\/\.gconf)$$/include "\/usr\/share\/debathena-gconf2-config\/gconf.\$$(ENV_DEBATHENA_HOME_TYPE)"/m or die;' $< > $@
+
+DISTRO = $(shell lsb_release --short --id)
+SUFFIX = $(SUFFIX-$(DISTRO))
+SUFFIX-Debian = -debathena
+SUFFIX-Ubuntu = -debathena-ubuntu
+
+ifeq ($(SUFFIX),)
+	$(error Unknown distro $(DISTRO).)
+endif
+
+debian/gconf.afs:
+	echo 'xml:readwrite:$$(HOME)/.gconf$(SUFFIX)' > $@
+
+debian/gconf.local:
+	echo 'xml:readwrite:$$(HOME)/.gconf' > $@
+
+debian/gconf.:
+	ln -sf gconf.local $@
+
+clean::
+	rm -f debian/path.debathena $(GCONF_FILES)
