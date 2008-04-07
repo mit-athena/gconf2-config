@@ -1,3 +1,10 @@
+debathena-gconf2-config (1.1) unstable; urgency=low
+
+  * Changed rules and control files to use new config-package-dev interface.
+    Extracted some transform code to transform_path.debathena
+
+ -- Michael Y McCanna <acrefoot@mit.edu>  Sun,  6 Apr 2008 18:04:17 -0400
+
 debathena-gconf2-config (1.0) unstable; urgency=low
 
   * Initial release.

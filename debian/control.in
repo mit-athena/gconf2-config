@@ -8,6 +8,8 @@ Standards-Version: 3.7.2
 Package: debathena-gconf2-config
 Architecture: all
 Depends: gconf2, debathena-pam-config
+Provides: ${diverted-files}
+Conflicts: ${diverted-files}
 Description: gconf configuration for Debian-Athena
  This package configures gconf2 to use ~/.gconf.debathena-DIST rather than
  ~/.gconf if your homedirectory is in AFS.  In order to do the dynamic
