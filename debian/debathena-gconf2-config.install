@@ -1,2 +1,1 @@
-debian/path.debathena etc/gconf/2
 debian/gconf* usr/share/debathena-gconf2-config/

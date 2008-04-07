@@ -2,12 +2,14 @@ Source: debathena-gconf2-config
 Section: debathena-config/gnome
 Priority: extra
 Maintainer: Debian-Athena Project <debathena@mit.edu>
-Build-Depends: cdbs (>= 0.4.23-1.1), debhelper (>= 4.2.0), debathena-config-build-common, debathena-config-build-common (>= 3.5~), gconf2, lsb-release
+Build-Depends: cdbs (>= 0.4.23-1.1), debhelper (>= 4.2.0), config-package-dev, gconf2, lsb-release
 Standards-Version: 3.7.2
 
 Package: debathena-gconf2-config
 Architecture: all
 Depends: gconf2, debathena-pam-config
+Provides: ${diverted-files}
+Conflicts: ${diverted-files}
 Description: gconf configuration for Debian-Athena
  This package configures gconf2 to use ~/.gconf.debathena-DIST rather than
  ~/.gconf if your homedirectory is in AFS.  In order to do the dynamic
