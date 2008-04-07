@@ -11,7 +11,7 @@ endif
 DEB_REPLACE_FILES_debathena-gconf2-config += \
 	/etc/gconf/2/path.debathena
 include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/rules/replace_files.mk
+include /usr/share/cdbs/1/rules/replace-files.mk
 
 GCONF_FILES = debian/gconf.afs debian/gconf.local debian/gconf.
 
