@@ -8,10 +8,10 @@ ifneq ($(wildcard /usr/share/gconf/default.path),)
 else
     GCONF2_PATH = /etc/gconf/2/path
 endif
-DEB_REPLACE_FILES_debathena-gconf2-config += \
+DEB_TRANSFORM_FILES_debathena-gconf2-config += \
 	/etc/gconf/2/path.debathena
 include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/rules/replace-files.mk
+include /usr/share/cdbs/1/rules/config-package.mk
 
 GCONF_FILES = debian/gconf.afs debian/gconf.local debian/gconf.
 

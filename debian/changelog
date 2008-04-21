@@ -1,3 +1,12 @@
+debathena-gconf2-config (1.2) unstable; urgency=low
+
+  * Convert to use config-package.mk interface, new in config-package-
+    dev 4.5
+  * Replace DEB_REPLACE_FILES with DEB_TRANSFORM_FILES, as this was
+    renamed in config-package-dev 4.5
+
+ -- Tim Abbott <tabbott@mit.edu>  Mon, 21 Apr 2008 19:05:52 -0400
+
 debathena-gconf2-config (1.1) unstable; urgency=low
 
   * Changed rules and control files to use new config-package-dev interface.
