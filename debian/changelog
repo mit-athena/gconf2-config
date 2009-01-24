@@ -1,3 +1,10 @@
+debathena-gconf2-config (1.3) unstable; urgency=low
+
+  * Do not use the same gconf configuration for different releases of
+    Debian/Ubuntu, since gconf defaults are not backwards-compatible.
+
+ -- Tim Abbott <tabbott@mit.edu>  Thu,  1 May 2008 22:01:57 -0400
+
 debathena-gconf2-config (1.2) unstable; urgency=low
 
   * Convert to use config-package.mk interface, new in config-package-

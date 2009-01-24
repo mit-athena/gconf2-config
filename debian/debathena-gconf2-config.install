@@ -1,1 +1,2 @@
 debian/gconf* usr/share/debathena-gconf2-config/
+debian/10debathena-copy-gconf etc/X11/Xsession.d/

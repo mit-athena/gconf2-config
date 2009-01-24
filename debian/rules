@@ -21,13 +21,14 @@ DISTRO = $(shell lsb_release --short --id)
 SUFFIX = $(SUFFIX-$(DISTRO))
 SUFFIX-Debian = -debathena
 SUFFIX-Ubuntu = -debathena-ubuntu
+RELEASE = $(shell lsb_release --short --codename)
 
 ifeq ($(SUFFIX),)
 	$(error Unknown distro $(DISTRO).)
 endif
 
 debian/gconf.afs:
-	echo 'xml:readwrite:$$(HOME)/.gconf$(SUFFIX)' > $@
+	echo 'xml:readwrite:$$(HOME)/.gconf-debathena-$(RELEASE)' > $@
 
 debian/gconf.local:
 	echo 'xml:readwrite:$$(HOME)/.gconf' > $@

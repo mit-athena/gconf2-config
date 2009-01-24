@@ -1,0 +1,38 @@
+#!/bin/sh
+
+consider() {
+    TARGET="$1"
+    if [ "-${CODENAME}" = "$TARGET" ]; then 
+	FINISHED="yes"
+    fi
+    TRY="$HOME/.gconf-debathena${TARGET}"
+    if [ ! "$FINISHED" = "yes" ] && [ -e "$TRY" ]; then
+	SOURCE="$TRY"
+    fi
+}
+
+SOURCE=""
+FINISHED="no"
+CODENAME=`lsb_release --short --codename`
+DISTRO=`lsb_release --short --id`
+GCONF="$HOME/.gconf-debathena-$CODENAME"
+if [ ! -e "$GCONF" ]; then
+   if [ "$DISTRO" = "Ubuntu" ]; then
+      consider "-dapper"
+      consider "-edgy"
+      consider "-feisty"
+      consider "-gutsy"
+      consider "-ubuntu"
+      consider "-hardy"
+      consider "-intrepid"
+   fi
+   if [ "$DISTRO" = "Debian" ]; then
+      consider "-sarge"
+      consider ""
+      consider "-etch"
+      consider "-lenny"
+   fi
+   if [ -n "$SOURCE" ]; then
+       cp -a "$SOURCE" "$GCONF"
+   fi
+fi
