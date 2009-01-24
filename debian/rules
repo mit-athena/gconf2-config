@@ -1,6 +1,5 @@
 #!/usr/bin/make -f
 
-DEB_AUTO_UPDATE_DEBIAN_CONTROL = 1
 DEB_DIVERT_EXTENSION = .debathena
 ifneq ($(wildcard /usr/share/gconf/default.path),)
     GCONF2_PATH = /usr/share/gconf/default.path
