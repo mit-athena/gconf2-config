@@ -1,3 +1,9 @@
+debathena-gconf2-config (1.5) unstable; urgency=low
+
+  * Add jaunty and squeeze to list of release to upgrade from.
+
+ -- Tim Abbott <tabbott@mit.edu>  Fri, 20 Feb 2009 13:07:04 -0500
+
 debathena-gconf2-config (1.4) unstable; urgency=low
 
   * Remove DEB_AUTO_UPDATE_DEBIAN_CONTROL.

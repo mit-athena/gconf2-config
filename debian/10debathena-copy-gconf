@@ -25,12 +25,14 @@ if [ ! -e "$GCONF" ]; then
       consider "-ubuntu"
       consider "-hardy"
       consider "-intrepid"
+      consider "-jaunty"
    fi
    if [ "$DISTRO" = "Debian" ]; then
       consider "-sarge"
       consider ""
       consider "-etch"
       consider "-lenny"
+      consider "-squeeze"
    fi
    if [ -n "$SOURCE" ]; then
        cp -a "$SOURCE" "$GCONF"
