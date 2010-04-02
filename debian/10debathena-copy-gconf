@@ -11,30 +11,32 @@ consider() {
     fi
 }
 
-SOURCE=""
-FINISHED="no"
-CODENAME=`lsb_release --short --codename`
-DISTRO=`lsb_release --short --id`
-GCONF="$HOME/.gconf-debathena-$CODENAME"
-if [ ! -e "$GCONF" ]; then
-   if [ "$DISTRO" = "Ubuntu" ]; then
-      consider "-dapper"
-      consider "-edgy"
-      consider "-feisty"
-      consider "-gutsy"
-      consider "-ubuntu"
-      consider "-hardy"
-      consider "-intrepid"
-      consider "-jaunty"
-   fi
-   if [ "$DISTRO" = "Debian" ]; then
-      consider "-sarge"
-      consider ""
-      consider "-etch"
-      consider "-lenny"
-      consider "-squeeze"
-   fi
-   if [ -n "$SOURCE" ]; then
-       cp -a "$SOURCE" "$GCONF"
-   fi
+if [ "$(dpkg-query -W -f '${Status}' debathena-gconf2-config 2>/dev/null)" = "install ok installed" ]; then
+    SOURCE=""
+    FINISHED="no"
+    CODENAME=`lsb_release --short --codename`
+    DISTRO=`lsb_release --short --id`
+    GCONF="$HOME/.gconf-debathena-$CODENAME"
+    if [ ! -e "$GCONF" ]; then
+	if [ "$DISTRO" = "Ubuntu" ]; then
+	    consider "-dapper"
+	    consider "-edgy"
+	    consider "-feisty"
+	    consider "-gutsy"
+	    consider "-ubuntu"
+	    consider "-hardy"
+	    consider "-intrepid"
+	    consider "-jaunty"
+	fi
+	if [ "$DISTRO" = "Debian" ]; then
+	    consider "-sarge"
+	    consider ""
+	    consider "-etch"
+	    consider "-lenny"
+	    consider "-squeeze"
+	fi
+	if [ -n "$SOURCE" ]; then
+	    cp -a "$SOURCE" "$GCONF"
+	fi
+    fi
 fi
