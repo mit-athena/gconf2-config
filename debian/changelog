@@ -3,8 +3,12 @@ debathena-gconf2-config (1.7) unstable; urgency=low
   * Configure gconf through /usr/share/gconf/default.path instead of
     /etc/gconf/2/path, as it makes ucf less likely to do dumb
     things. (Trac: #247)
+  * Squash some lintian warnings:
+    - Add missing misc:Depends.
+    - Bump debhelper compatibility level.
+    - Update to latest standards version.
 
- -- Evan Broder <broder@mit.edu>  Wed, 14 Apr 2010 10:41:51 -0400
+ -- Evan Broder <broder@mit.edu>  Thu, 15 Apr 2010 19:01:28 -0400
 
 debathena-gconf2-config (1.6) unstable; urgency=low
 

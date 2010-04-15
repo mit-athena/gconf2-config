@@ -3,11 +3,11 @@ Section: debathena-config/gnome
 Priority: extra
 Maintainer: Debathena Project <debathena@mit.edu>
 Build-Depends: @cdbs@, gconf2 (>= 2.12.0-2), lsb-release
-Standards-Version: 3.7.2
+Standards-Version: 3.8.4
 
 Package: debathena-gconf2-config
 Architecture: all
-Depends: gconf2 (>= 2.12.0-2), debathena-pam-config, ucf
+Depends: ${misc:Depends}, gconf2 (>= 2.12.0-2), debathena-pam-config, ucf
 Provides: ${diverted-files}
 Conflicts: ${diverted-files}
 Description: gconf configuration for Debathena
