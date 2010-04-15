@@ -1,14 +1,13 @@
 #!/usr/bin/make -f
 
 DEB_DIVERT_EXTENSION = .debathena
-ifneq ($(wildcard /usr/share/gconf/default.path),)
-    GCONF2_PATH = /usr/share/gconf/default.path
-    DEB_CHECK_FILES_SOURCE_/etc/gconf/2/path = $(GCONF2_PATH)
-else
-    GCONF2_PATH = /etc/gconf/2/path
-endif
 DEB_TRANSFORM_FILES_debathena-gconf2-config += \
+	/usr/share/gconf/default.path.debathena
+
+DEB_UNDIVERT_FILES_debathena-gconf2-config += \
 	/etc/gconf/2/path.debathena
+DEB_UNDIVERT_VERSION_/etc/gconf/2/path.debathena = 1.7~
+
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/config-package.mk
 
