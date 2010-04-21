@@ -30,36 +30,36 @@ e85c1fff42b26376b545370be5fb0a99
 f4675a2f84af10bb8d2b04305b235dff
 "
 
-# If we don't think /etc/gconf/2/path has been intentionally modified
-# by the user, then purge it from ucf's database to avoid presenting
-# conflicts
+# Figure out if we think that /etc/gconf/2/path has been intentionally
+# modified by the user
+#
+# There are two types of conflicts:
+#  1: User modified /etc/gconf/2/path.debathena, but left the path ->
+#     path.debathena symlink in place
+#  2: User changed the /etc/gconf/2/path symlink
+#
+# We have to figure out what's going on before undoing the diversion
+# (which will happen in the debhelper block). But we can't actually do
+# anything about it until afterwards, because of ucf's broken symlink
+# handling.
 conflict=0
-modified_path_debathena=0
 path=/etc/gconf/2/path
 if [ "$1" = "configure" ] && \
     dpkg --compare-versions "$2" lt-nl 1.7~; then
     if [ "$(readlink -n "$path")" = "path.debathena" ]; then
         if [ -r $path.debathena ] && \
-	    echo "$unmodified_path_files" | \
+            echo "$unmodified_path_files" | \
             grep -Fxq "$(md5sum "$path.debathena" | awk '{ print $1 }')"; then
             # Definitely pristine
-            ucf --purge "$path"
-	    rm -f "$path" "$path.debathena" "$path.debathena-orig"
+            conflict=0
         else
-            # User modified /etc/gconf/2/path.debathena - we'll have to
-            # deal with this later
-            modified_path_debathena=1
+            # User modified /etc/gconf/2/path.debathena
             conflict=1
         fi
     else
-	# User changed /etc/gconf/2/path.debathena-orig symlink
-        conflict=1
+        # User changed /etc/gconf/2/path symlink
+        conflict=2
     fi
-fi
-
-if [ "$conflict" = 1 ]; then
-    # Force a ucf conflict. We are terrible people
-    sed -i -re 's,^[0-9a-f]{32}  (/etc/gconf/2/path)$,00000000000000000000000000000000  \1,' /var/lib/ucf/hashfile
 fi
 
 # dh_installdeb will replace this with shell code automatically
@@ -69,18 +69,26 @@ fi
 
 case "$1" in
     configure)
-	# If the user modified /etc/gconf/2/path.debathena without
-	# changing the symlink, then move their changed file to
-	# /etc/gconf/2/path
-	if dpkg --compare-versions "$2" lt-nl 1.7~ && \
-	    [ "$modified_path_debathena" = 1 ]; then
-	    if [ -r /etc/gconf/2/path.debathena ]; then
-		mv /etc/gconf/2/path.debathena /etc/gconf/2/path || :
-	    else
-		mv /etc/gconf/2/path /etc/gconf/2/path.old || :
-	    fi
-	fi
-	ucf /usr/share/gconf/default.path /etc/gconf/2/path
+        if dpkg --compare-versions "$2" lt-nl 1.7~; then
+            if [ "$conflict" = 0 ]; then
+                ucf --purge /etc/gconf/2/path
+                rm -f /etc/gconf/2/path
+            else
+                # Force a ucf conflict
+                sed -i -re 's,^[0-9a-f]{32}  (/etc/gconf/2/path)$,00000000000000000000000000000000  \1,' /var/lib/ucf/hashfile
+
+                # If /etc/gconf/2/path was really path.debathena
+                # before, make sure it still is when we run ucf next
+                if [ "$conflict" = 1 ]; then
+                    if [ -r /etc/gconf/2/path.debathena ]; then
+                        mv /etc/gconf/2/path.debathena /etc/gconf/2/path || :
+                    else
+                        mv /etc/gconf/2/path /etc/gconf/2/path.old || :
+                    fi
+                fi
+            fi
+        fi
+        ucf /usr/share/gconf/default.path /etc/gconf/2/path
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
