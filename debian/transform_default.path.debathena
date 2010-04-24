@@ -1,2 +1,3 @@
 #!/usr/bin/perl -0p
 s|^(xml:readwrite:\$\(HOME\)/\.gconf)$|include "/usr/share/debathena-gconf2-config/gconf.\$(ENV_DEBATHENA_HOME_TYPE)"|m or die;
+s|^(include "\$\(HOME\)/\.gconf\.path")$|include "\$(HOME)/.gconf.path.debathena"\n$1|m or die;

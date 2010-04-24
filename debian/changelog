@@ -1,3 +1,11 @@
+debathena-gconf2-config (1.8) unstable; urgency=low
+
+  * Allow users to specify Debathena-specific gconf sources in
+    ~/.gconf.path.debathena. (Added for use with debathena-gdm-config to
+    override the gdm user's gconf settings).
+
+ -- Evan Broder <broder@mit.edu>  Thu, 22 Apr 2010 17:38:40 -0400
+
 debathena-gconf2-config (1.7) unstable; urgency=low
 
   * Configure gconf through /usr/share/gconf/default.path instead of
