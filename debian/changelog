@@ -1,3 +1,9 @@
+debathena-gconf2-config (1.8.1) unstable; urgency=low
+
+  * Don't use dpkg-query because it's slow (Trac #778)
+
+ -- Jonathan Reed <jdreed@mit.edu>  Wed, 23 Feb 2011 20:25:58 -0500
+
 debathena-gconf2-config (1.8) unstable; urgency=low
 
   * Allow users to specify Debathena-specific gconf sources in
