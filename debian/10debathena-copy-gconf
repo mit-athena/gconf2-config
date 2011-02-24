@@ -11,7 +11,7 @@ consider() {
     fi
 }
 
-if [ "$(dpkg-query -W -f '${Status}' debathena-gconf2-config 2>/dev/null)" = "install ok installed" ]; then
+if [ -f /usr/share/debathena-gconf2-config/pkg-installed ]; then
     SOURCE=""
     FINISHED="no"
     CODENAME=`lsb_release --short --codename`
