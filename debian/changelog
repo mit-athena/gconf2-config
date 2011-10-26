@@ -1,3 +1,9 @@
+debathena-gconf2-config (1.8.2) unstable; urgency=low
+
+  * No change rebuild to pick up config-package-dev 4.13 changes
+
+ -- Jonathan Reed <jdreed@mit.edu>  Wed, 26 Oct 2011 18:29:26 -0400
+
 debathena-gconf2-config (1.8.1) unstable; urgency=low
 
   * Don't use dpkg-query because it's slow (Trac #778)
