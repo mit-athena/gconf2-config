@@ -2,8 +2,8 @@ Source: debathena-gconf2-config
 Section: debathena-config/gnome
 Priority: extra
 Maintainer: Debathena Project <debathena@mit.edu>
-Build-Depends: @cdbs@, gconf2 (>= 2.12.0-2), lsb-release
-Standards-Version: 3.8.4
+Build-Depends: cdbs, debhelper, dh-buildinfo, config-package-dev (>= 5.0~), gconf2 (>= 2.12.0-2), lsb-release
+Standards-Version: 3.9.3
 
 Package: debathena-gconf2-config
 Architecture: all
