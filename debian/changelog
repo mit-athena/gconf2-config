@@ -1,10 +1,15 @@
-debathena-gconf2-config (1.8.3) UNRELEASED; urgency=low
+debathena-gconf2-config (1.8.3) unstable; urgency=low
 
+  [ Jonathan Reed ]
   * Switch from control.in to control (Trac: #561)
   * Bump Standards-Version to 3.9.3
   * Bump compat level to 7
 
- -- Jonathan Reed <jdreed@mit.edu>  Wed, 03 Apr 2013 13:38:35 -0400
+  [ Alexander Chernyakhovsky ]
+  * Add git-buildpackage configuration
+  * Set source format to 3.0 (native)
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sun, 29 Sep 2013 05:36:58 -0400
 
 debathena-gconf2-config (1.8.2) unstable; urgency=low
 
